@@ -1,0 +1,13 @@
+﻿    <form>
+        <input class="form-control" @bind="curSubject.SubjectId" hidden="true"/>
+        
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" @bind="curSubject.Name" autofocus="true" placeholder="Bezeichnung des Themas"/>
+        </div>
+    
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" @bind="curSubject.Description" placeholder="Beschreibung des Themas"/>
+        </div>
+        <button class="btn btn-primary" type="button" @onclick="UpdateSubject">Übernehmen</button>
+        <button class="btn btn-secondary" type="button" @onclick="CancelUpdate">Abbrechen</button>
+    </form>

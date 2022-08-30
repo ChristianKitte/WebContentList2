@@ -13,21 +13,22 @@
 }
 else
 {
-    <form>
-        <input class="form-control" @bind="curSubject.SubjectId" hidden="true"/>
-        
+    <EditForm Model="@curSubject" OnValidSubmit="@UpdateSubject">
+        <InputNumber typ="int" class="form-control" @bind-Value="curSubject.SubjectId" hidden="true"/>
+
         <div class="input-group mb-3">
-            <input type="text" class="form-control" @bind="curSubject.Name" autofocus="true" placeholder="Bezeichnung des Themas"/>
-        </div>
-    
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" @bind="curSubject.Description" placeholder="Beschreibung des Themas"/>
+            <InputText class="form-control" @bind-Value="curSubject.Name" autofocus="true" placeholder="Bezeichnung des Themas"/>
         </div>
 
-        <button class="btn btn-primary" type="button" @onclick="UpdateSubject">Übernehmen</button>
+        <div class="input-group mb-3">
+            <InputText class="form-control" @bind-Value="curSubject.Description" placeholder="Beschreibung des Themas"/>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Übernehmen</button>
         <button class="btn btn-secondary" type="button" @onclick="CancelUpdate">Abbrechen</button>
 
-    </form>
+        <DataAnnotationsValidator/>
+    </EditForm>
 }
 
 @code {
@@ -52,7 +53,7 @@ else
 
     private void CancelUpdate()
     {
-        navigationManager.NavigateTo("subjectlist");
+        navigationManager.NavigateTo("subjectlist",true);
     }
 
 }
