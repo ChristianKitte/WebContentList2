@@ -250,6 +250,9 @@ namespace WebContentList.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("created")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("ContentId");
 
                     b.HasIndex("SubjectId");

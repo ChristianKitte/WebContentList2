@@ -14,6 +14,8 @@ public class Content
 
     [ForeignKey("SubjectId")] public Subject Subject { get; set; }
 
+    [Required] public DateTime created { get; set; } = DateTime.Today;
+
     [Required] public string Url { get; set; } = string.Empty;
 
     [Required] public bool ShowPreview { get; set; } = true;

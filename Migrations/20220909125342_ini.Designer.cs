@@ -12,7 +12,7 @@ using WebContentList.Data;
 namespace WebContentList.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220824165218_ini")]
+    [Migration("20220909125342_ini")]
     partial class ini
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -251,6 +251,9 @@ namespace WebContentList.Migrations
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("created")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ContentId");
 
