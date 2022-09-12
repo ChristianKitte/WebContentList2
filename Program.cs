@@ -1,9 +1,7 @@
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+
 using WebContentList.Areas.Identity;
 using WebContentList.Data;
 
@@ -29,14 +27,17 @@ builder.Services.AddScoped<SubjectsService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
 }
 else
 {
+    app.Services.GetService<ApplicationDbContext>()?.Database.Migrate();
+
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

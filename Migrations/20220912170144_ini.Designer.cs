@@ -12,7 +12,7 @@ using WebContentList.Data;
 namespace WebContentList.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220909125342_ini")]
+    [Migration("20220912170144_ini")]
     partial class ini
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
