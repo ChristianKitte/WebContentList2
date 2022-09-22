@@ -4,6 +4,7 @@
 
 @inject SubjectsService SubjectsService
 @inject ContentsService ContentsService
+@inject NavigationManager navigationManager
 
 <h3>Alle Inhalte</h3>
 
@@ -18,12 +19,12 @@ else
     </div>
 
     <div>
-        <select name="Gruppe">
-            <option value="-1" @onclick=@(() => GetVideosByGroup(-1)) @onclick:preventDefault="true">Alle</option>
+        <select @onchange=@((x)=>GetVideosByGroup(x))>
+            <option value="-1" @onclick:preventDefault="true">Alle</option>
 
             @foreach (var group in _content)
             {
-                <option value="@group.SubjectId" @onclick=@(() => GetVideosByGroup(group.SubjectId)) @onclick:preventDefault="true">@group.Name</option>
+                <option value="@group.SubjectId" @onclick:preventDefault="true">@group.Name</option>
             }
         </select>
     </div>
@@ -38,14 +39,10 @@ else
                         {
                             <iframe width="450" height="300" src="@subject.Url" allowfullscreen></iframe>
                         }
-                        else
-                        {
-                            <p>@subject.Url</p>
-                        }
 
                         <p>@subject.Name</p>
                         <p>@subject.Description</p>
-                        
+
                         <div class="col-4">
                             <a class="btn btn-primary" href="@subject.Url" target="_blank">In neuer Seite öffnen..</a>
                             <a class="btn btn-secondary" href="editcontent/@subject.ContentId">Bearbeiten</a>
@@ -71,8 +68,10 @@ else
         _subjects = await ContentsService.GetContentList();
     }
 
-    private async Task GetVideosByGroup(int groupId)
+    private async Task GetVideosByGroup(ChangeEventArgs obj)
     {
+        int groupId = Int16.Parse(obj.Value.ToString());
+
         if (groupId == -1)
         {
             _subjects = await ContentsService.GetContentList();
@@ -81,6 +80,6 @@ else
         {
             _subjects = await ContentsService.GetContentListBySubject(groupId);
         }
-    }
 
+    }
 }

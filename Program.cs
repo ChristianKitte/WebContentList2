@@ -35,11 +35,17 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.Services.GetService<ApplicationDbContext>()?.Database.Migrate();
+    //app.Services.GetService<ApplicationDbContext>()?.Database.Migrate();
 
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
+
+var webSocketOptions = new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromMinutes(2)
+};
+app.UseWebSockets(webSocketOptions);
 
 app.UseHttpsRedirection();
 
